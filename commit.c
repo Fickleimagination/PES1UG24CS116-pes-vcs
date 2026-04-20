@@ -193,9 +193,43 @@ int head_update(const ObjectID *new_commit) {
 //   - head_update       : moves the branch pointer to your new commit
 //
 // Returns 0 on success, -1 on error.
-int commit_create(const char *message, ObjectID *commit_id_out) {
-    // TODO: Implement commit creation
-    // (See Lab Appendix for logical steps)
-    (void)message; (void)commit_id_out;
-    return -1;
+    int commit_create(const char *message, ObjectID *commit_id_out) {
+
+    // Step 2: Build tree from index and get root tree hash
+    ObjectID tree_id;
+    if (tree_from_index(&tree_id) != 0) return -1;
+
+    // Step 3: Fill in the Commit struct
+    Commit c;
+    memset(&c, 0, sizeof(c));
+    c.tree = tree_id;
+
+    // Step 4: Read parent commit from HEAD (may not exist for first commit)
+    c.has_parent = (head_read(&c.parent) == 0) ? 1 : 0;
+
+    // Step 5: Set author and timestamp
+    snprintf(c.author, sizeof(c.author), "%s", pes_author());
+    c.timestamp = (uint64_t)time(NULL);
+
+    // Step 6: Set commit message
+    snprintf(c.message, sizeof(c.message), "%s", message);
+
+    // Step 7: Serialize the commit struct to text
+    void *data;
+    size_t len;
+    if (commit_serialize(&c, &data, &len) != 0) return -1;
+
+    // Step 8: Write the commit object to the object store
+    ObjectID commit_id;
+    int rc = object_write(OBJ_COMMIT, data, len, &commit_id);
+    free(data);
+    if (rc != 0) return -1;
+
+    // Step 9: Update HEAD to point to new commit
+    if (head_update(&commit_id) != 0) return -1;
+
+    // Step 10: Return the commit ID if caller wants it
+    if (commit_id_out) *commit_id_out = commit_id;
+    return 0;
+
 }
