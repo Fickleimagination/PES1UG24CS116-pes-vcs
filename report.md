@@ -8,46 +8,46 @@
 ## Phase 1: Object Storage
 
 ### Screenshot 1A — `./test_objects` output
-![1A](screenshots/1A.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ### Screenshot 1B — `find .pes/objects -type f`
-![1B](screenshots/1B.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ---
 
 ## Phase 2: Tree Objects
 
 ### Screenshot 2A — `./test_tree` output
-![2A](screenshots/2A.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ### Screenshot 2B — `xxd` of raw tree object
-![2B](screenshots/2B.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ---
 
 ## Phase 3: Index (Staging Area)
 
 ### Screenshot 3A — `pes init` → `pes add` → `pes status`
-![3A](screenshots/3A.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ### Screenshot 3B — `cat .pes/index`
-![3B](screenshots/3B.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ---
 
 ## Phase 4: Commits and History
 
 ### Screenshot 4A — `pes log` showing three commits
-![4A](screenshots/4A.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ### Screenshot 4B — `find .pes -type f | sort`
-![4B](screenshots/4B.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ### Screenshot 4C — `cat .pes/refs/heads/main` and `cat .pes/HEAD`
-![4C](screenshots/4C.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ### Final — `make test-integration`
-![integration](screenshots/integration.png)
+See screenshots in OS_JACKFRUIT.pdf
 
 ---
 
